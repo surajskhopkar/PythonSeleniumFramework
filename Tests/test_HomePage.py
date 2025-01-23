@@ -30,6 +30,7 @@ class TestHomePage(BaseClass):
         msg = message.successAlert().text
         print(msg)
         assert "Success" in msg
+        self.driver.refresh()
 
     @pytest.fixture(params=[('Suraj','Suraj@gmail.com','123456'),('Saanvi','Saanvi@gmail.com','123456'),('Joe','Joe@gmail.com','123456')])
     def getData(self,request):
