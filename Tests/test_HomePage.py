@@ -1,4 +1,6 @@
 import time
+
+import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -9,7 +11,7 @@ from utilities.BaseClass import BaseClass
 
 class TestHomePage(BaseClass):
 
-    def test_formSubmission(self):
+    def test_formSubmission(self, getData):
 
         name = HomePage(self.driver)
         email = HomePage(self.driver)
@@ -18,9 +20,9 @@ class TestHomePage(BaseClass):
         submit = HomePage(self.driver)
         message = HomePage(self.driver)
 
-        name.username().send_keys('Selenium')
-        email.emailid().send_keys('TestAutomation@gmail.com')
-        password.passWord().send_keys('1234567')
+        name.username().send_keys(getData[0])
+        email.emailid().send_keys(getData[1])
+        password.passWord().send_keys(getData[2])
         checkbox.checkBox().click()
         time.sleep(10)
         submit.submitButton().click()
@@ -29,6 +31,8 @@ class TestHomePage(BaseClass):
         print(msg)
         assert "Success" in msg
 
-        # xpath: //tagname[@attribute='value']
+    @pytest.fixture(params=[('Suraj','Suraj@gmail.com','123456'),('Saanvi','Saanvi@gmail.com','123456'),('Joe','Joe@gmail.com','123456')])
+    def getData(self,request):
+        return request.param
 
 
