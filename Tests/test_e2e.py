@@ -36,12 +36,8 @@ class TestOne(BaseClass):
         finalcheckoutbutton.finalCheckoutButton().click()
         countryeditBox.countryEditBox().send_keys("ind")
 
-
-        wait = WebDriverWait(self.driver, 10)
-        wait.until(expected_conditions.presence_of_element_located((By.LINK_TEXT, "India")))
+        self.verifyLinkPresent("India")
         verifylinkpresent.verifyLinkPresent().click()
         checkbox.checkBox().click()
         purchasebutton.purchaseButton().click()
         print(successmessage.successMessage())
-
-
