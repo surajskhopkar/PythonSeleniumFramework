@@ -13,6 +13,7 @@ from utilities.BaseClass import BaseClass
 class TestOne(BaseClass):
 
     def test_e2e(self):
+        logging = self.getLogger()
         homePage = HomePage(self.driver)
         getproductlist = CheckoutPage(self.driver)
         checkoutbutton = CheckoutPage(self.driver)
@@ -24,6 +25,7 @@ class TestOne(BaseClass):
         successmessage = ConfirmPage(self.driver)
 
         homePage.shopItems().click()
+        logging.info('Getting al the card items')
         items_list_elements = getproductlist.getProductList()
 
         for element in items_list_elements:
@@ -34,10 +36,16 @@ class TestOne(BaseClass):
 
         checkoutbutton.checkOutButton().click()
         finalcheckoutbutton.finalCheckoutButton().click()
+
+        logging.info('Searching for the country')
         countryeditBox.countryEditBox().send_keys("ind")
 
+        logging.info('Checking if country name is present in the drop-down')
         self.verifyLinkPresent("India")
         verifylinkpresent.verifyLinkPresent().click()
         checkbox.checkBox().click()
+
+        logging.info('Clicking on the purchase button')
         purchasebutton.purchaseButton().click()
-        print(successmessage.successMessage())
+
+        logging.info(successmessage.successMessage())
